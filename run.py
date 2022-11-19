@@ -12,33 +12,30 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('love_sandwiches')
 
+def validate_data(values):
+    """
+    Inside the try statement, converts the data to integers.
+    Also checks if 6 values have been enetered. 
+    """
+    try:
+        if len(values) != 6:
+            raise ValueError(
+                f"Exactly 6 values must be entered.  You provided {len(values)} value(s)."
+            )
+    except ValueError as e:
+        print(f"Invalid entry: {e}.  Please try again")
+        
 def get_sales_data():
     """
-    Get sales figures input from the user 
+    Get sales figures input from the user
+    Check if the input contains 6 integers, and store the data.
     """
-    print("Enter sales data (For example, '35, 40, 41, 35, 46, 30')")
+    
+    print("Enter sales data (For example, '35,40,41,35,46,30')")
     data = input("Your input: ")
-    print(f"You enetered: {data}")
-    validation = input("Enter 'v' to validate, or 'r' to re-enter: ")
-    list = []
-    if validation != 'v' and validation != 'r':
-        print("Invalid entry.")
-        continue
-    if validation == 'r':
-        continue
+    list = data.split(',')
+    print(f"You entered {list}")
+    validate_data(list)
 
-    list = data.split(', ')
-    if not len(list) == 6:
-        print("Enter 6 values.")    
-        continue
+get_sales_data()
 
-    for num in list:
-        if not num.isdigit():
-            print("Enter only numbers.")        
-            
-    list = [int(n) for n in list]
-    print("The data have been stored.")
-    
-
-    
-        
