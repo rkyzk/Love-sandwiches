@@ -50,7 +50,7 @@ def update_sales_worksheet(data):
     print("Updating the sales worksheet...")
     sales_worksheet = SHEET.worksheet('sales')
     sales_worksheet.append_row(data)
-    print('Sales worksheet has been updated successfully.')
+    print('Sales worksheet has been updated successfully.\n')
 
 data = get_sales_data()
 print(data)
