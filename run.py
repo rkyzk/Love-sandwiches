@@ -43,5 +43,15 @@ def validate_data(values):
     except ValueError as e:
         print(f"Invalid entry: {e}.  Please try again")
 
+def update_sales_worksheet(data):
+    """
+    Add new data to sales worksheet
+    """ 
+    print("Updating the sales worksheet...")
+    sales_worksheet = SHEET.worksheet('sales')
+    sales_worksheet.append_row(data)
+    print('Sales worksheet has been updated successfully.')
+
 data = get_sales_data()
 print(data)
+update_sales_worksheet(data)
