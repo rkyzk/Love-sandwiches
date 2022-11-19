@@ -18,9 +18,13 @@ def validate_data(values):
     Also checks if 6 values have been enetered. 
     """
     try:
+        values = [int(n) for n in values]
+    except ValueError as e:
+        print(f"All values must be numeric.")
+    try:
         if len(values) != 6:
             raise ValueError(
-                f"Exactly 6 values must be entered.  You provided {len(values)} value(s)."
+                f"Exactly 6 numeric values must be entered.  You provided {len(values)} value(s)."
             )
     except ValueError as e:
         print(f"Invalid entry: {e}.  Please try again")
