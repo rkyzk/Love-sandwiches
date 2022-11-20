@@ -44,15 +44,6 @@ def validate_data(values):
     except ValueError as e:
         print(f"Invalid entry: {e}.  Please try again")
 
-def update_sales_worksheet(data):
-    """
-    Add new data to sales worksheet
-    """ 
-    print("Updating the sales worksheet...\n")
-    sales_worksheet = SHEET.worksheet('sales')
-    sales_worksheet.append_row(data)
-    print('Sales worksheet has been updated successfully.\n')
-
 def calculate_surplus_data(sales_data):
     """
     Calculate surplus by stock - sales 
@@ -69,24 +60,23 @@ def calculate_surplus_data(sales_data):
         
     return surplus_data
 
-def update_surplus_data(surplus_data):
+def update_worksheet(data, worksheet):
     """
-    Add new surplus data to surplus data worksheet
+    Update a worksheet
     """
-    print("updating surplus data worksheet.\n")
-    surplus_worksheet = SHEET.worksheet('surplus')
-    surplus_worksheet.append_row(surplus_data)
-    print('Surplus worksheet has been updated successfully.\n')
-
+    print(f"Updating {worksheet} data worksheet.\n")
+    wsheet_to_update = SHEET.worksheet(worksheet)
+    wsheet_to_update.append_row(data)
+    print(f"{worksheet} worksheet has been updated.\n")
 
 def main():
     """
     Run all program functions
     """
     data = get_sales_data()
-    update_sales_worksheet(data)
+    update_worksheet(data, "sales")
     surplus_data = calculate_surplus_data(data)
-    update_surplus_data(surplus_data)
+    update_worksheet(surplus_data, "surplus")
 
 print('Welcome to Love Sandwiches data automation')
 main()
